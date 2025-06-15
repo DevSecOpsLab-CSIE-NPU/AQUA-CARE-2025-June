@@ -31,6 +31,27 @@
         state: present
       become: no
 
+    - name: Enable kubectl autocompletion in .bashrc
+      lineinfile:
+        path: "/home/ubuntu/.bashrc"
+        line: 'source <(kubectl completion bash)'
+        state: present
+      become: no
+
+    - name: Add kubectl alias to .bashrc
+      lineinfile:
+        path: "/home/ubuntu/.bashrc"
+        line: 'alias k=kubectl'
+        state: present
+      become: no
+
+    - name: Add kubectl completion for alias k to .bashrc
+      lineinfile:
+        path: "/home/ubuntu/.bashrc"
+        line: 'complete -F __start_kubectl k'
+        state: present
+      become: no
+
     - name: Display all pods in all namespaces
       shell: kubectl get pod -A
       environment:

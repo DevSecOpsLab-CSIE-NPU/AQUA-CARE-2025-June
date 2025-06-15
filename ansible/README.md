@@ -23,9 +23,12 @@
 
 ## 快速開始
 
-請依照以下步驟開始使用本 Ansible 專案：
+```
+ansible-playbook -i ../inventories/hosts.ini install_k3s.yaml 
+source ~/.bashrc
+k get po -A
 
-
+```
 
 ## 授權
 
