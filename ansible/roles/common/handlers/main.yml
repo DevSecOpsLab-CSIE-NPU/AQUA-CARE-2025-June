@@ -1,0 +1,11 @@
+- name: Restart service
+  service:
+    name: my_service
+    state: restarted
+
+- name: Reload configuration
+  command: systemctl reload my_service
+  when: config_changed
+
+- name: Notify on change
+  meta: flush_handlers
