@@ -13,6 +13,9 @@
 ## 快速開始
 
 ```
+bash tools/install_ansbile.sh
+source .venv/bin/activate
+pip install ansible
 ansible-playbook -i ansible/inventories/hosts.ini ansible/playbooks/install_k3s.yaml
 source ~/.bashrc
 k get po -A
