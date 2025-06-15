@@ -1,1 +1,1 @@
-k port-forward svc/kibana-kibana 5601:5601
+kubectl port-forward svc/kibana-kibana 5601:5601

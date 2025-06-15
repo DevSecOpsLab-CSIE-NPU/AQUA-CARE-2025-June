@@ -8,7 +8,7 @@ ES_ACCOUNT=$(kubectl get secret elasticsearch-master-credentials \
 ES_PASSWORD=$(kubectl get secret elasticsearch-master-credentials \
   -o jsonpath="{.data.password}" | base64 --decode)
 
-echo "Using ES account: $ES_ACCOUNT"
+echo "Using ES account: $ES_ACCOUNT $ES_PASSWORD"
 
 # 取得 Elasticsearch Service 的 exposed PORT
 ES_SVC_NAME="elasticsearch-master"
