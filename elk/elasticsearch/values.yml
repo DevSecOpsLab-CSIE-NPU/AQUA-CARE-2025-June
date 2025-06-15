@@ -44,7 +44,9 @@ esJvmOptions: {}
 # Extra environment variables to append to this nodeGroup
 # This will be appended to the current 'env:' key. You can use any of the kubernetes env
 # syntax here
-extraEnvs: []
+extraEnvs:
+  - name: "xpack.security.http.ssl.enabled"
+    value: "false"
 #  - name: MY_ENVIRONMENT_VAR
 #    value: the_value_goes_here
 
@@ -103,7 +105,7 @@ initResources: {}
 #   cpu: "25m"
 #   memory: "128Mi"
 
-networkHost: "0.0.0.0"
+networkHost: 0.0.0.0
 
 volumeClaimTemplate:
   accessModes: ["ReadWriteOnce"]
@@ -187,7 +189,7 @@ podManagementPolicy: "Parallel"
 # If you experience slow pod startups you probably want to set this to `false`.
 enableServiceLinks: true
 
-protocol: https
+protocol: http
 httpPort: 9200
 transportPort: 9300
 
@@ -195,7 +197,7 @@ service:
   enabled: true
   labels: {}
   labelsHeadless: {}
-  type: ClusterIP
+  type: LoadBalancer
   # Consider that all endpoints are considered "ready" even if the Pods themselves are not
   # https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/#ServiceSpec
   publishNotReadyAddresses: false
