@@ -58,3 +58,18 @@
         KUBECONFIG: "/home/ubuntu/.k3s/k3s.yaml"
       register: pods_output
       changed_when: false
+
+    - name: Install Helm using official script
+      shell: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      args:
+        creates: /usr/local/bin/helm
+
+    - name: Add elastic Helm repo
+      shell: helm repo add elastic https://helm.elastic.co
+      args:
+        creates: /home/ubuntu/.cache/helm/repository/elastic-index.yaml
+      become: false
+
+    - name: Update Helm repos
+      shell: helm repo update
+      become: false
