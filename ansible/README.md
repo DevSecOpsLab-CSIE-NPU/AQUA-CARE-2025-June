@@ -10,21 +10,10 @@
 - **playbooks/**：存放主要的 playbook 檔案。
   - **site.yml**：主要的 playbook，負責協調指定主機上的任務。
 
-- **roles/**：包含封裝任務、處理程序、模板和變數的角色。
-  - **common/**：包含常用任務與配置的角色。
-    - **tasks/**：存放該角色的主要任務。
-      - **main.yml**：定義要在目標主機上執行的動作。
-    - **handlers/**：存放當其他任務通知時執行的處理程序。
-      - **main.yml**：定義該角色的處理程序。
-    - **templates/**：用於存放 Jinja2 模板檔案，以動態產生配置。
-    - **files/**：存放可複製到目標主機的靜態檔案。
-    - **vars/**：存放該角色專用的變數。
-      - **main.yml**：定義任務與模板中使用的變數。
-
 ## 快速開始
 
 ```
-ansible-playbook -i ../inventories/hosts.ini install_k3s.yaml 
+ansible-playbook -i ansible/inventories/hosts.ini ansible/playbooks/install_k3s.yaml
 source ~/.bashrc
 k get po -A
 
