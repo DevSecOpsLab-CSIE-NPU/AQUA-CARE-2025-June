@@ -19,6 +19,6 @@ fi
 
 # # Upgrade pip and install Ansible
 # pip install --upgrade pip
-# pip install ansible
+# pip install ansible requests joblib tqdm
 
 # echo "Virtual environment and Ansible are ready."
