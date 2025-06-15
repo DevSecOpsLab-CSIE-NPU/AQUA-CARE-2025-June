@@ -20,11 +20,11 @@ if [ -z "$ES_PORT" ]; then
 fi
 # 取得本機外部 IP
 ES_HOST=$(curl -s ifconfig.me)
-ES_URL="http://$ES_HOST:$ES_PORT"
+ES_URL="https://$ES_HOST:$ES_PORT"
 echo "Elasticsearch URL: $ES_URL"
 
 # 測試 Elasticsearch 是否可用
-response=$(curl -s -o /dev/null -w "%{http_code}" -u "$ES_ACCOUNT:$ES_PASSWORD" "$ES_URL")
+response=$(curl -k -s -o /dev/null -w "%{http_code}" -u "$ES_ACCOUNT:$ES_PASSWORD" "$ES_URL")
 if [ "$response" -eq 200 ]; then
   echo "✅ Elasticsearch is available."
 else
@@ -33,4 +33,4 @@ else
 fi
 # 列出所有 Elasticsearch 索引
 echo "Fetching Elasticsearch index list..."
-curl -s -u "$ES_ACCOUNT:$ES_PASSWORD" "$ES_URL/_cat/indices?v"
+curl -k -s -u "$ES_ACCOUNT:$ES_PASSWORD" "$ES_URL/_cat/indices?v"

@@ -44,9 +44,7 @@ esJvmOptions: {}
 # Extra environment variables to append to this nodeGroup
 # This will be appended to the current 'env:' key. You can use any of the kubernetes env
 # syntax here
-extraEnvs:
-  - name: "xpack.security.http.ssl.enabled"
-    value: "false"
+extraEnvs: []
 #  - name: MY_ENVIRONMENT_VAR
 #    value: the_value_goes_here
 
@@ -189,7 +187,7 @@ podManagementPolicy: "Parallel"
 # If you experience slow pod startups you probably want to set this to `false`.
 enableServiceLinks: true
 
-protocol: http
+protocol: https
 httpPort: 9200
 transportPort: 9300
 
