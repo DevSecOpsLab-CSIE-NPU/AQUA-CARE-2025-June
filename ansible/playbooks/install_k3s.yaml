@@ -3,6 +3,8 @@
   hosts: all
   become: yes
   gather_facts: false
+  roles:
+    - helm
   tasks:
     - name: Install k3s using official script
       shell: curl -sfL https://get.k3s.io | sh -
@@ -59,18 +61,3 @@
         KUBECONFIG: "/home/ubuntu/.k3s/k3s.yaml"
       register: pods_output
       changed_when: false
-
-    - name: Install Helm using official script
-      shell: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-      args:
-        creates: /usr/local/bin/helm
-
-    - name: Add elastic Helm repo
-      shell: helm repo add elastic https://helm.elastic.co
-      args:
-        creates: /home/ubuntu/.cache/helm/repository/elastic-index.yaml
-      become: false
-
-    - name: Update Helm repos
-      shell: helm repo update
-      become: false

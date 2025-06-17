@@ -1,0 +1,24 @@
+---
+- name: 下載 Helm 安裝腳本
+  get_url:
+    url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    dest: /tmp/get-helm-3
+    mode: '0755'
+
+- name: 執行 Helm 安裝腳本
+  command: /tmp/get-helm-3
+
+- name: 移除安裝腳本
+  file:
+    path: /tmp/get-helm-3
+    state: absent
+
+- name: 新增 elastic Helm 軟體倉庫
+  shell: helm repo add elastic https://helm.elastic.co
+  args:
+    creates: /home/ubuntu/.cache/helm/repository/elastic-index.yaml
+  become: false
+
+- name: 更新 Helm 軟體倉庫
+  shell: helm repo update
+  become: false
