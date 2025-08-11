@@ -1,0 +1,35 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: quickstart
+spec:
+  version: 8.16.1
+  nodeSets:
+  - name: master-node
+    count: 3
+    config:
+      node.roles: ["master"]
+      node.store.allow_mmap: false
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: ""   # 與下方 PV 一致（空字串）
+  - name: data-nodes
+    count: 3
+    config:
+      node.roles: ["data","ingest","ml"]
+      node.store.allow_mmap: false
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1000Gi
+        storageClassName: ""   # 與下方 PV 一致（空字串）
